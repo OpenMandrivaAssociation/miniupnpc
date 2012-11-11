@@ -1,0 +1,11 @@
+--- CMakeLists.txt.install	2011-08-07 08:06:04.000000000 +0200
++++ CMakeLists.txt	2011-08-07 08:06:38.000000000 +0200
+@@ -164,6 +164,8 @@
+   igd_desc_parse.h
+   upnpreplyparse.h
+   upnperrors.h
++	miniupnpctypes.h
++	portlistingparse.h
+   declspec.h
+   DESTINATION include/miniupnpc
+ )
