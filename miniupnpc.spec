@@ -62,3 +62,11 @@ rm -rf %buildroot
 %files -n %{develname}
 %{_includedir}/miniupnpc
 %{_libdir}/*.so
+
+
+%changelog
+* Sun Jan 01 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.6-1mdv2012.0
++ Revision: 748613
+- Import miniupnpc (from mageia, thanks to fwang)
+- Import miniupnpc (from mageia, thanks to fwang)
+
