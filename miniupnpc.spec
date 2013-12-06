@@ -1,18 +1,25 @@
-%define major 8
+%define major 9
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
 
 Summary: Library and tool to control NAT in UPnP-enabled routers
 Name: miniupnpc
-Version: 1.6
-Release: %mkrel 1
+Version: 1.8
+Release: 1
 License: LGPLv2+
 Group: System/Libraries
 URL: http://miniupnp.free.fr/
 Source: http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
-Patch0: miniupnpc-1.6-link.patch
-Patch1: miniupnpc-1.6-install-headers.patch
 BuildRequires: cmake
+BuildRequires: python-devel
+# Install headers and add extra file to compilation
+# Patch originally from Mageia Linux
+Patch0:		%{name}-files.patch
+# Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
+Patch1:		%{name}-version.patch
+# Link to and find libminiupnpc
+Patch2:		%{name}-tests.patch
+Source1:	USAGE
 
 %description
 miniupnpc is an implementation of a UPnP client library, enabling
@@ -41,32 +48,61 @@ This package contains the header files and development documentation for
 miniupnpc. If you like to develop programs using miniupnpc, you will need
 to install miniupnpc-devel.
 
+%package	-n python-%{name}
+Summary:	Python interface to %{name}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+
+%description	-n python-%{name}
+This package contains python interfaces to %{name}.
+
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p0
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+cp %{SOURCE1} .
+
+sed -i "s|\(\tpython setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
+
+# version not updated in setup.py
+sed -i 's/"1\.7"/"%{version}"/' setup.py
+
+# Changelog says added -ansi without reason, but that
+# breaks C files (python module) using C++ comments
+sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 
 %build
-%cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=OFF
+%cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=ON
 %make
+cd ..
+make upnpc-shared pythonmodule
 
 %install
-rm -rf %buildroot
-
 %makeinstall_std -C build
 
+make DESTDIR=$RPM_BUILD_ROOT installpythonmodule
+install -D -m644 man3/miniupnpc.3 $RPM_BUILD_ROOT/%{_mandir}/man3/miniupnpc.3
+install -D -m 0755 upnpc-shared $RPM_BUILD_ROOT%{_bindir}/upnpc
+
+%check
+make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
+
+%files
+%doc Changelog.txt
+%doc LICENSE
+%doc README
+%{_bindir}/upnpc
+%doc USAGE
+
 %files -n %{libname}
-%{_libdir}/*.so.%{major}
-%{_libdir}/*.so.*.*
+%{_libdir}/*.so.*
 
 %files -n %{develname}
 %{_includedir}/miniupnpc
 %{_libdir}/*.so
+%{_mandir}/man3/miniupnpc.3*
 
-
-%changelog
-* Sun Jan 01 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.6-1mdv2012.0
-+ Revision: 748613
-- Import miniupnpc (from mageia, thanks to fwang)
-- Import miniupnpc (from mageia, thanks to fwang)
+%files		-n python-%{name}
+%{python_sitearch}/miniupnpc-%{version}-py?.?.egg-info
+%{python_sitearch}/miniupnpc.so
 
