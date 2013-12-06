@@ -73,7 +73,7 @@ sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 
 %build
 %cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=ON
-%make upnpc-shared all
+make upnpc-shared all
 cd ..
 make upnpc-shared pythonmodule
 
