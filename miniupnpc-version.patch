@@ -1,15 +1,6 @@
-diff -up miniupnpc-1.8/CMakeLists.txt.orig miniupnpc-1.8/CMakeLists.txt
---- miniupnpc-1.8/CMakeLists.txt.orig	2013-08-13 10:28:07.207807956 -0300
-+++ miniupnpc-1.8/CMakeLists.txt	2013-08-13 10:28:22.476808540 -0300
-@@ -1,7 +1,7 @@
- cmake_minimum_required (VERSION 2.6)
- 
- project (miniupnpc C)
--set (MINIUPNPC_VERSION 1.7)
-+set (MINIUPNPC_VERSION 1.8)
- set (MINIUPNPC_API_VERSION 9)
- 
- if (NOT CMAKE_BUILD_TYPE)
+diff -up miniupnpc-1.9/CMakeLists.txt.orig miniupnpc-1.9/CMakeLists.txt
+--- miniupnpc-1.9/CMakeLists.txt.orig	2014-04-16 00:27:30.652100530 -0300
++++ miniupnpc-1.9/CMakeLists.txt	2014-04-16 00:27:59.441101633 -0300
 @@ -117,7 +117,6 @@ endif (UPNPC_BUILD_STATIC)
  if (UPNPC_BUILD_SHARED)
    add_library (upnpc-shared SHARED ${MINIUPNPC_SOURCES})

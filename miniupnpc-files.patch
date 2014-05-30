@@ -1,6 +1,6 @@
-diff -up miniupnpc-1.8/CMakeLists.txt.orig miniupnpc-1.8/CMakeLists.txt
---- miniupnpc-1.8/CMakeLists.txt.orig	2013-08-13 10:02:05.237748142 -0300
-+++ miniupnpc-1.8/CMakeLists.txt	2013-08-13 10:02:14.308748490 -0300
+diff -up miniupnpc-1.9/CMakeLists.txt.orig miniupnpc-1.9/CMakeLists.txt
+--- miniupnpc-1.9/CMakeLists.txt.orig	2014-04-16 00:13:21.465068012 -0300
++++ miniupnpc-1.9/CMakeLists.txt	2014-04-16 00:13:30.289068350 -0300
 @@ -165,6 +165,8 @@ install (FILES
    igd_desc_parse.h
    upnpreplyparse.h

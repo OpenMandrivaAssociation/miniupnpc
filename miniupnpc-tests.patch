@@ -1,6 +1,6 @@
-diff -up miniupnpc-1.8/CMakeLists.txt.orig miniupnpc-1.8/CMakeLists.txt
---- miniupnpc-1.8/CMakeLists.txt.orig	2013-08-13 10:04:23.583753440 -0300
-+++ miniupnpc-1.8/CMakeLists.txt	2013-08-13 10:05:03.228754958 -0300
+diff -up miniupnpc-1.9/CMakeLists.txt.orig miniupnpc-1.9/CMakeLists.txt
+--- miniupnpc-1.9/CMakeLists.txt.orig	2014-04-16 00:13:30.289068350 -0300
++++ miniupnpc-1.9/CMakeLists.txt	2014-04-16 00:16:15.527074677 -0300
 @@ -128,25 +128,25 @@ if (UPNPC_BUILD_TESTS)
    target_link_libraries (testminixml ${LDLIBS})
  

@@ -1,10 +1,10 @@
-%define major 9
+%define major 10
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
 
 Summary: Library and tool to control NAT in UPnP-enabled routers
 Name: miniupnpc
-Version: 1.8
+Version: 1.9
 Release: 1
 License: LGPLv2+
 Group: System/Libraries
