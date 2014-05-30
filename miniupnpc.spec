@@ -72,12 +72,14 @@ sed -i 's/"1\.7"/"%{version}"/' setup.py
 sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 
 %build
+export CC=%{__cc}
 %cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=ON
 make upnpc-shared all
 cd ..
 make upnpc-shared pythonmodule
 
 %install
+export CC=%{__cc}
 %makeinstall_std -C build
 
 make DESTDIR=$RPM_BUILD_ROOT installpythonmodule
@@ -85,6 +87,7 @@ install -D -m644 man3/miniupnpc.3 $RPM_BUILD_ROOT/%{_mandir}/man3/miniupnpc.3
 install -D -m 0755 upnpc-shared $RPM_BUILD_ROOT%{_bindir}/upnpc
 
 %check
+export CC=%{__cc}
 make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
 
 %files
