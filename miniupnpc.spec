@@ -5,7 +5,7 @@
 Summary: Library and tool to control NAT in UPnP-enabled routers
 Name: miniupnpc
 Version: 1.9
-Release: 1
+Release: 2
 License: LGPLv2+
 Group: System/Libraries
 URL: http://miniupnp.free.fr/
