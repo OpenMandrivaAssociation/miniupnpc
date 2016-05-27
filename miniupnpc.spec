@@ -12,7 +12,6 @@ URL: http://miniupnp.free.fr/
 Source: http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 BuildRequires: cmake
 BuildRequires: python-devel
-Patch0:		%{name}-files.patch
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
 Patch1:		%{name}-version.patch
 # Link to and find libminiupnpc
