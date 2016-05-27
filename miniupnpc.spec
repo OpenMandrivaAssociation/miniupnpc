@@ -102,4 +102,3 @@ make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
 %files -n python-%{name}
 %{python_sitearch}/miniupnpc-%{version}-py?.?.egg-info
 %{python_sitearch}/miniupnpc.cpython-*.so
-%{python_sitearch}/miniupnpc.so
