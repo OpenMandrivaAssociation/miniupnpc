@@ -1,4 +1,4 @@
-%define major 10
+%define major 16
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
 %define _disable_lto 1
@@ -17,7 +17,7 @@ Patch1:		%{name}-version.patch
 Patch2:		%{name}-tests.patch
 Source1:	USAGE
 BuildRequires:	cmake
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig(python3)
 
 %description
 miniupnpc is an implementation of a UPnP client library, enabling
@@ -101,4 +101,5 @@ make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
 
 %files -n python-%{name}
 %{python_sitearch}/miniupnpc-%{version}-py?.?.egg-info
+%{python_sitearch}/miniupnpc.cpython-*.so
 %{python_sitearch}/miniupnpc.so
