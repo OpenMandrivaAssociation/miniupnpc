@@ -4,16 +4,14 @@
 
 Summary: Library and tool to control NAT in UPnP-enabled routers
 Name: miniupnpc
-Version: 1.9
-Release: 2
+Version: 2.0
+Release: 1
 License: LGPLv2+
 Group: System/Libraries
 URL: http://miniupnp.free.fr/
 Source: http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 BuildRequires: cmake
 BuildRequires: python-devel
-# Install headers and add extra file to compilation
-# Patch originally from Mageia Linux
 Patch0:		%{name}-files.patch
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
 Patch1:		%{name}-version.patch
@@ -57,15 +55,11 @@ This package contains python interfaces to %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 cp %{SOURCE1} .
 
 sed -i "s|\(\tpython setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
-
-# version not updated in setup.py
-sed -i 's/"1\.7"/"%{version}"/' setup.py
 
 # Changelog says added -ansi without reason, but that
 # breaks C files (python module) using C++ comments
@@ -108,4 +102,3 @@ make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
 %files		-n python-%{name}
 %{python_sitearch}/miniupnpc-%{version}-py?.?.egg-info
 %{python_sitearch}/miniupnpc.so
-
