@@ -1,25 +1,23 @@
-%define major 10
+%define major 16
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
+%define _disable_lto 1
 
-Summary: Library and tool to control NAT in UPnP-enabled routers
-Name: miniupnpc
-Version: 1.9
-Release: 2
-License: LGPLv2+
-Group: System/Libraries
-URL: http://miniupnp.free.fr/
-Source: http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
-BuildRequires: cmake
-BuildRequires: python-devel
-# Install headers and add extra file to compilation
-# Patch originally from Mageia Linux
-Patch0:		%{name}-files.patch
+Summary:	Library and tool to control NAT in UPnP-enabled routers
+Name:		miniupnpc
+Version:	2.0
+Release:	1
+License:	LGPLv2+
+Group:		System/Libraries
+URL:		http://miniupnp.free.fr/
+Source:		http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
 Patch1:		%{name}-version.patch
 # Link to and find libminiupnpc
 Patch2:		%{name}-tests.patch
 Source1:	USAGE
+BuildRequires:	cmake
+BuildRequires:	pkgconfig(python3)
 
 %description
 miniupnpc is an implementation of a UPnP client library, enabling
@@ -28,8 +26,8 @@ Gateway Device" present on the network. In UPnP terminology, it is
 a UPnP Control Point.
 
 %package -n %{libname}
-Summary: Library and tool to control NAT in UPnP-enabled routers
-Group: System/Libraries
+Summary:	Library and tool to control NAT in UPnP-enabled routers
+Group:		System/Libraries
 
 %description -n %{libname}
 miniupnpc is an implementation of a UPnP client library, enabling
@@ -38,34 +36,30 @@ Gateway Device" present on the network. In UPnP terminology, it is
 a UPnP Control Point.
 
 %package -n %{develname}
-Summary: Header files, libraries and development documentation for miniupnpc
-Group: Development/C
-Requires: %{libname} = %{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
+Summary:	Header files, libraries and development documentation for miniupnpc
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{develname} 
 This package contains the header files and development documentation for
 miniupnpc. If you like to develop programs using miniupnpc, you will need
 to install miniupnpc-devel.
 
-%package	-n python-%{name}
+%package -n python-%{name}
 Summary:	Python interface to %{name}
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 
-%description	-n python-%{name}
+%description -n python-%{name}
 This package contains python interfaces to %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 cp %{SOURCE1} .
 
 sed -i "s|\(\tpython setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
-
-# version not updated in setup.py
-sed -i 's/"1\.7"/"%{version}"/' setup.py
 
 # Changelog says added -ansi without reason, but that
 # breaks C files (python module) using C++ comments
@@ -98,14 +92,13 @@ make CFLAGS="%{optflags} -DMINIUPNPC_SET_SOCKET_TIMEOUT" check
 %doc USAGE
 
 %files -n %{libname}
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
 %{_includedir}/miniupnpc
 %{_libdir}/*.so
 %{_mandir}/man3/miniupnpc.3*
 
-%files		-n python-%{name}
+%files -n python-%{name}
 %{python_sitearch}/miniupnpc-%{version}-py?.?.egg-info
-%{python_sitearch}/miniupnpc.so
-
+%{python_sitearch}/miniupnpc.cpython-*.so
