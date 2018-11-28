@@ -1,0 +1,22 @@
+From 891b15b78929c9ddf59f3522ae2564d4fa40414d Mon Sep 17 00:00:00 2001
+From: Tengiz Sharafiev <btolfa@gmail.com>
+Date: Wed, 9 May 2018 13:51:30 +0300
+Subject: [PATCH] Fix copy-paste typo
+
+---
+ miniupnpc/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c1061b1f..cc9fef0a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -124,7 +124,7 @@ if (UPNPC_BUILD_SHARED)
+   target_link_libraries (libminiupnpc-shared PRIVATE miniupnpc-private)
+   target_compile_definitions(libminiupnpc-shared PRIVATE MINIUPNP_EXPORTS)
+ 
+-  target_include_directories(libminiupnpc-static INTERFACE ../${CMAKE_CURRENT_SOURCE_DIR})
++  target_include_directories(libminiupnpc-shared INTERFACE ../${CMAKE_CURRENT_SOURCE_DIR})
+   if (WIN32)
+     target_link_libraries(libminiupnpc-shared INTERFACE ws2_32 iphlpapi)
+   endif()

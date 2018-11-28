@@ -1,20 +1,19 @@
-%define major 16
+%define major 17
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
 %define _disable_lto 1
 
 Summary:	Library and tool to control NAT in UPnP-enabled routers
 Name:		miniupnpc
-Version:	2.0
-Release:	2
+Version:	2.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://miniupnp.free.fr/
 Source:		http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
 Patch1:		%{name}-version.patch
-# Link to and find libminiupnpc
-Patch2:		%{name}-tests.patch
+Patch2:		miniupnpc-2.1-upstream-fix.patch
 Source1:	USAGE
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(python3)
@@ -55,11 +54,10 @@ This package contains python interfaces to %{name}.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1
+%apply_patches
 cp %{SOURCE1} .
 
-sed -i "s|\(\tpython setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
+sed -i "s|\(python setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
 
 # Changelog says added -ansi without reason, but that
 # breaks C files (python module) using C++ comments
