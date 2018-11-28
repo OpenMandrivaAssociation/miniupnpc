@@ -17,6 +17,7 @@ Patch2:		miniupnpc-2.1-upstream-fix.patch
 Source1:	USAGE
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	python3egg(setuptools)
 
 %description
 miniupnpc is an implementation of a UPnP client library, enabling
