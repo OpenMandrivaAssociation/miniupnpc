@@ -55,7 +55,7 @@ This package contains python interfaces to %{name}.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 cp %{SOURCE1} .
 
 sed -i "s|\(python setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
