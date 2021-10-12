@@ -1,9 +1,9 @@
-diff -up miniupnpc-1.9/CMakeLists.txt.orig miniupnpc-1.9/CMakeLists.txt
---- miniupnpc-1.9/CMakeLists.txt.orig	2014-04-16 00:27:30.652100530 -0300
-+++ miniupnpc-1.9/CMakeLists.txt	2014-04-16 00:27:59.441101633 -0300
-@@ -117,7 +117,6 @@ endif (UPNPC_BUILD_STATIC)
- if (UPNPC_BUILD_SHARED)
-   add_library (libminiupnpc-shared SHARED ${MINIUPNPC_SOURCES})
+diff -uraN miniupnpc-2.2.3/CMakeLists.txt omv-miniupnpc-2.2.3/CMakeLists.txt
+--- miniupnpc-2.2.3/CMakeLists.txt	2021-09-28 23:41:25.000000000 +0200
++++ omv-miniupnpc-2.2.3/CMakeLists.txt	2021-10-12 15:22:14.489230967 +0200
+@@ -141,7 +141,6 @@
+   add_library (miniupnpc::miniupnpc ALIAS libminiupnpc-shared)
+   set_target_properties (libminiupnpc-shared PROPERTIES EXPORT_NAME miniupnpc)
    set_target_properties (libminiupnpc-shared PROPERTIES OUTPUT_NAME "miniupnpc")
 -  set_target_properties (libminiupnpc-shared PROPERTIES VERSION ${MINIUPNPC_VERSION})
    set_target_properties (libminiupnpc-shared PROPERTIES SOVERSION ${MINIUPNPC_API_VERSION})
