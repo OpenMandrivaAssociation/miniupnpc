@@ -67,13 +67,11 @@ sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 %build
 export CC=%{__cc}
 %cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=ON
-make upnpc-shared all
-cd ..
-make upnpc-shared pythonmodule
 
+%make_build
 %install
 export CC=%{__cc}
-%makeinstall_std -C build
+%make_install -C build
 
 make DESTDIR=$RPM_BUILD_ROOT installpythonmodule
 install -D -m644 man3/miniupnpc.3 $RPM_BUILD_ROOT/%{_mandir}/man3/miniupnpc.3
