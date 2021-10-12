@@ -12,7 +12,7 @@ Group:		System/Libraries
 URL:		http://miniupnp.free.fr/
 Source:		http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
-Patch1:		%{name}-version.patch
+#Patch1:		%{name}-version.patch
 #Patch2:		miniupnpc-2.1-upstream-fix.patch
 Source1:	USAGE
 BuildRequires:	cmake
