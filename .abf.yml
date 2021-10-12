@@ -1,4 +1,2 @@
-removed_sources:
-  miniupnpc-2.0.tar.gz: 21181b364be330436922459c1f81ee641ac182a6
 sources:
-  miniupnpc-2.1.tar.gz: 7abef19a5460afad704814d8db0d998781799825
+  miniupnpc-2.2.3.tar.gz: 7d8c04f7012f6167a3911a520e353b53c211bf0b
