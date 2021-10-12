@@ -65,17 +65,31 @@ sed -i "s|\(python setup.py install\)$|\1 --root=\$(DESTDIR)/|" Makefile
 sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 
 %build
-export CC=%{__cc}
+#export CC=%{__cc}
 %cmake -DUPNPC_BUILD_STATIC=OFF -DUPNPC_BUILD_TESTS=ON
 
 %make_build
+
+%make_build miniupnpc.pc PREFIX=%{_prefix} LIBDIR=%{_lib}
+
+### build example client
+%make_build upnpc-shared all
+
+### build python3 bindings
+%py_build
+
 %install
-export CC=%{__cc}
+#export CC=%{__cc}
 %make_install -C build
 
-make DESTDIR=$RPM_BUILD_ROOT installpythonmodule
-install -D -m644 man3/miniupnpc.3 $RPM_BUILD_ROOT/%{_mandir}/man3/miniupnpc.3
-install -D -m 0755 upnpc-shared $RPM_BUILD_ROOT%{_bindir}/upnpc
+%py_install
+
+# install manpage and binary for example client using libminiupnpc
+install -D -m 644 man3/miniupnpc.3 %{buildroot}%{_mandir}/man3/miniupnpc.3
+install -D -m 0755 upnpc-shared %{buildroot}%{_bindir}/upnpc
+
+# install pkg-conf .pc file
+install -D -m 0644 miniupnpc.pc %{buildroot}%{_libdir}/pkgconfig/miniupnpc.pc
 
 %check
 export CC=%{__cc}
