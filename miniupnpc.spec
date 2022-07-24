@@ -74,13 +74,13 @@ sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 %make_build upnpc-shared all
 
 ### build python3 bindings
-%py_build
+#py_build
 
 %install
 #export CC=%{__cc}
 %make_install -C build
 
-%py_install
+#py_install
 
 # install manpage and binary for example client using libminiupnpc
 install -D -m 644 man3/miniupnpc.3 %{buildroot}%{_mandir}/man3/miniupnpc.3
