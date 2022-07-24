@@ -70,8 +70,6 @@ sed -i 's/\(CFLAGS += -ansi\)/#\1/' Makefile
 
 %make_build
 
-%make_build miniupnpc.pc PREFIX=/usr LIBDIR=lib64
-
 ### build example client
 %make_build upnpc-shared all
 
