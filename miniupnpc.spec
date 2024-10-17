@@ -9,7 +9,7 @@ Version:	2.1
 Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://miniupnp.free.fr/
+URL:		https://miniupnp.free.fr/
 Source:		http://miniupnp.free.fr/files/%{name}-%{version}.tar.gz
 # Do not create libminiupnpc.so.1.5 and libminiupnpc.so.8 linking to it
 Patch1:		%{name}-version.patch
